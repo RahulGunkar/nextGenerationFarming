@@ -1,0 +1,39 @@
+<html>
+
+<style type="text/css">
+	#main_menu{
+		font-size: 30px;
+		background-color: yellow;
+	}
+	#main_container{
+		border-radius: 5%;
+		border-style: solid;
+		border-width: 55px	;
+		border-color: gray;
+	}
+	#inner{
+		background-color: lightblue;
+	}
+
+</style>
+
+   <body >
+   	<div id="main_container">
+   		<textarea rows="5" cols="65" id="main_menu">
+            1.Sell a crop/seed
+            2.Services
+            3.Get Crop Check Up
+            (Reply with 1-3)
+         </textarea>
+         <div id="inner">	
+      <form action = "http://localhost:5000/result" method = "POST">
+         <p><h2>Reply with the numbers(1-3)</h2> <input type = "text" name = "Name" style="width: 100%;height: 50px"/></p>
+        
+         <p><input type = "submit" value = "submit" style="color: green;width: 250px;height: 50px;font-size: 40px;margin-left:360px; " /></p>
+      </form>
+  </div>
+  </div>
+      <h2 style="color: blue; margin-left: 360px;font-size: 40px">FRONTEND(MOBILE SCREEN)</h2>
+   </body>
+</html>
+

@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+   <body>
+      
+         <textarea>
+            1.Sell a crop/seed
+            2.Services
+            3.Get Crop Check Up
+            (Reply with 1-3)
+         </textarea>
+
+
+
+      
+         {% if result == '1' %}
+            <h1>you have chosen to sell a crop</h1>
+            {% elif result == '2' %}
+            <h1>you have chosen to opt for services</h1>
+            {% else %}
+            <h1>Your request for the crop check up has been recorded</h1>
+          {% endif %}      
+         
+            
+        
+     
+      
+   </body>
+</html>
