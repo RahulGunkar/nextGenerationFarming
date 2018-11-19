@@ -9,8 +9,6 @@ farmer = {'12345678':"Rahul Gunkar",
 		'22222222':" Panda Patil",
 		'33333333':" Sayalo Patil",
 		'44444444':" Shubham Sawarkar"
-
-
 }
 
 
@@ -25,7 +23,9 @@ aadharServProvide=""
 aadharCropMon= "" #corp monitoring
 sellSeedAadhar=""	#seed
 sellAadhar = ""	#crop
+cropChoice = 0
 
+crops = ['rice','wheat','pulses','millet']
 
 @app.route('/')
 def home():
@@ -34,14 +34,14 @@ def home():
 
 @app.route('/mainPage',methods = ['POST', 'GET'])
 def mainPage():
-   if request.method == 'POST':
+    if request.method == 'POST':
       result = request.form
       return render_template("homePage.html",result = result,farmer=farmer)
 
 
 @app.route('/result',methods = ['POST', 'GET'])
 def result():
-   if request.method == 'POST':
+    if request.method == 'POST':
       result = request.form['userInput']
      
       if result == '1':
@@ -56,7 +56,7 @@ def result():
 
 @app.route('/sell',methods = ['POST', 'GET'])
 def sell():
-   if request.method == 'POST':
+    if request.method == 'POST':
       result = request.form['userInput']
      
       if result == '1':
@@ -77,22 +77,22 @@ def sell():
 
 @app.route('/serviceMapper',methods = ['POST', 'GET'])
 def serviceMapper():
-   if request.method == 'POST':
-      result = request.form['userInput']
-     
-      if result == '1':
-      	return render_template("requestService.html")
-      elif result == '2':
-      	return render_template("provideService.html")
-     
-      else:
-      	return render_template("service.html",result = result)
+	if request.method == 'POST':
+	  result = request.form['userInput']
+	 
+	  if result == '1':
+	  	return render_template("requestService.html")
+	  elif result == '2':
+	  	return render_template("provideService.html")
+	 
+	  else:
+	  	return render_template("service.html",result = result)
 
 
 
 @app.route('/reqServMap',methods = ['POST', 'GET'])
 def reqServMap():
-   if request.method == 'POST':
+    if request.method == 'POST':
       result = request.form['userInput']
      
       return render_template("reqServMap.html",aadhar=result,otp=random.randint(1,1000))
@@ -100,15 +100,15 @@ def reqServMap():
 
 @app.route('/reqServMap2',methods = ['POST', 'GET'])
 def reqServMap2():
-   if request.method == 'POST':
+    if request.method == 'POST':
       result = request.form['userInput']
      
       return render_template("reqServMap2.html",aadhar=result,otp=random.randint(1,1000))
 
 @app.route('/serviceRaised',methods = ['POST', 'GET'])
 def serviceRaised():
-   if request.method == 'POST':
-      
+    if request.method == 'POST':
+        
      
       return render_template("served.html",otp=random.randint(1,1000))
 
@@ -116,7 +116,7 @@ def serviceRaised():
 
 @app.route('/serviceRaised2',methods = ['POST', 'GET'])
 def serviceRaised2():
-   if request.method == 'POST':     
+    if request.method == 'POST':     
      
       return render_template("served2.html",otp=random.randint(1,1000))
 
@@ -132,7 +132,7 @@ def serviceRaised2():
 
 @app.route('/mapper',methods = ['POST', 'GET'])
 def mapper():
-   if request.method == 'POST':
+    if request.method == 'POST':
       result = request.form['userInput']
       global sellAadhar
       sellAadhar = sellAadhar + result
@@ -148,9 +148,10 @@ def mapper():
 
 @app.route('/seedMapper',methods = ['POST', 'GET'])
 def seedMapper():
-   if request.method == 'POST':
+    if request.method == 'POST':
       result = request.form['userInput']
-      global sellSeedAadhar
+      global sellSeedAadhar 
+
       global otpSellSeed
       otpSellSeed = str(random.randint(1,1000))
       sellSeedAadhar = sellSeedAadhar + result
@@ -159,7 +160,7 @@ def seedMapper():
 
 @app.route('/seedSold',methods = ['POST', 'GET'])
 def seedSold():
-   if request.method == 'POST':
+    if request.method == 'POST':
       result = request.form['userInput']
       if result == "*307*"+otpSellSeed+"#":
       	
@@ -169,16 +170,43 @@ def seedSold():
 
 
 
+
+
+
+@app.route('/selectCrop',methods = ['POST', 'GET'])
+def selectCrop():
+	if request.method == 'POST':
+		result = request.form['userInput']
+		print(result)
+		if result == otpSell:
+		#select crop html	
+			return render_template("selectCrop.html",aadhar =sellAadhar, farmer=farmer)
+		else:
+			return render_template("mapper.html",farmer=farmer,otp=otp)
+
+
+@app.route('/selectQuantity',methods = ['POST', 'GET'])
+def selectQuantity():
+	if request.method == 'POST':
+		global cropChoice
+		choice = request.form['userInput']
+		cropChoice = int(choice)
+		print(crops[cropChoice])
+
+		return render_template("selectQuantity.html",aadhar =sellAadhar, farmer=farmer)
+  
+
+
+
+
 @app.route('/cropSold',methods = ['POST', 'GET'])
 def cropSold():
-   if request.method == 'POST':
-      result = request.form['userInput']
-      print(result)
-      if result == otpSell:
+    if request.method == 'POST':
+      quantity = request.form['userInput']
+      print(result)   
       	
-      	return render_template("cropSold.html",aadhar =sellAadhar, farmer=farmer)
-      else:
-      	return render_template("mapper.html",farmer=farmer,otp=otp)
+      return render_template("cropSold.html",aadhar = sellAadhar, farmer=farmer,cropChoice=cropChoice,quantity=quantity,crops=crops)
+     
 
       
 

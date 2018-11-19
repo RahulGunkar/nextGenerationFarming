@@ -25,14 +25,6 @@
   margin-left: 10px;
   font-size: 20px;
 }
-#backTextArea{
-  margin-left: 10px;
-  font-size: 20px;
-  background-color: lightgreen;
-
-}
-
-
 #input{
   color: green;
   width: 450px;
@@ -55,26 +47,23 @@
   <div id="frontend">
     <br>
     <textarea rows="10" cols="46" id="frontTextArea">
-            Your request for selling the crops has been recored in the system.
-            We will notify you as soon as there is a buyer.
+          Enter the quantity
+
     </textarea>
-    
-      <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    <form action = "http://localhost:5000/cropSold" method = "POST" id="input">
+         <p><h3> Select your choices(1 - 4) </h3> <input type = "text" name = "userInput" style="width: 100%;height: 50px"/></p>
+        
+         <p><input type = "submit" value = "submit" style="width: 40%;margin-left: 90px" /></p>
+      </form>
+      <br><br><br><br><br><br><br><br>
       <h3 style="color: red; font-size: 25px;margin-left: 10px">FRONTEND(MOBILE SCREEN)</h3>
   </div>
 
 
 
   <div id="backend">
-    <textarea rows="20" cols="46" id="backTextArea">
-    Name                          Status
-    ------                    ----------------
-    {{farmer[aadhar] }}      wants to sell {{quantity}} Kg {{crops[cropChoice]}}
-    </textarea>
-  
-    <br><br>
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
       <h3 style="color: red; font-size: 25px;margin-left: 10px">BACKEND(FARMER's DATABASE)</h3>
-    
   </div>
 
 
